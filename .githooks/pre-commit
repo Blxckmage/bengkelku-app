@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# Git hook to validate branch naming convention
+# Format: {issue-code}/{dev-name}/{issue-title-slug}
+# Example: BEN-123/faza/add-authentication
+
+branch_name=$(git symbolic-ref --short HEAD 2>/dev/null)
+
+# Skip validation for main/master branches
+if [[ "$branch_name" == "main" || "$branch_name" == "master" ]]; then
+    exit 0
+fi
+
+# Pattern: BEN-{number}/{dev-name}/{slug}
+pattern="^BEN-[0-9]+/[a-z]+/[a-z0-9-]+$"
+
+if ! [[ "$branch_name" =~ $pattern ]]; then
+    echo "❌ Invalid branch name: $branch_name"
+    echo ""
+    echo "Branch name must follow the format:"
+    echo "  {issue-code}/{dev-name}/{issue-title-slug}"
+    echo ""
+    echo "Examples:"
+    echo "  BEN-123/faza/add-authentication"
+    echo "  BEN-456/reza/fix-login-bug"
+    echo ""
+    echo "Rules:"
+    echo "  - Issue code: BEN-{number}"
+    echo "  - Dev name: lowercase, single name"
+    echo "  - Title slug: lowercase, hyphenated"
+    echo ""
+    exit 1
+fi
+
+exit 0

@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Git hook to validate commit message format
+# Format: Conventional Commits (feat:, fix:, chore:, etc.)
+
+commit_msg_file=$1
+commit_msg=$(cat "$commit_msg_file")
+
+# Pattern: type(optional scope): description
+# Types: feat, fix, docs, style, refactor, test, chore
+pattern="^(feat|fix|docs|style|refactor|test|chore|perf|ci|build|revert)(\(.+\))?: .{1,}"
+
+if ! echo "$commit_msg" | head -1 | grep -qE "$pattern"; then
+    echo "❌ Invalid commit message format"
+    echo ""
+    echo "Commit message must follow Conventional Commits:"
+    echo "  type(optional-scope): description"
+    echo ""
+    echo "Valid types:"
+    echo "  feat, fix, docs, style, refactor, test, chore, perf, ci, build, revert"
+    echo ""
+    echo "Examples:"
+    echo "  feat: add user authentication"
+    echo "  fix(api): handle null response"
+    echo "  chore: update dependencies"
+    echo ""
+    exit 1
+fi
+
+exit 0
