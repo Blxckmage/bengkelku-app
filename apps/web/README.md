@@ -9,6 +9,12 @@ bun install
 bun run dev
 ```
 
+Local D1 migrations are applied automatically before the dev server starts. To apply them manually:
+
+```bash
+bun run db:migrate:local
+```
+
 # Building For Production
 
 To build this application for production:
@@ -53,6 +59,17 @@ This project uses the Cloudflare Vite plugin (configured in `vite.config.ts`) an
 For production env vars, run `wrangler secret put MY_VAR` for each secret listed in `.env.example`. Public (non-secret) vars go in `wrangler.jsonc` under `vars`.
 
 KV, D1, R2, and Durable Object bindings are configured in `wrangler.jsonc` — see https://developers.cloudflare.com/workers/wrangler/configuration/.
+
+### D1
+
+Local dev uses the `DB` D1 binding. Migrations live in `drizzle/` and are generated with `bun run db:generate`.
+
+For production, create the database, replace the placeholder `database_id` in `wrangler.jsonc`, then apply migrations:
+
+```bash
+wrangler d1 create bengkelku-db
+bun run db:migrate:remote
+```
 
 
 ## Shadcn

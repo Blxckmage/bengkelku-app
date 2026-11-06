@@ -95,22 +95,18 @@ function DemoDrizzle() {
 				<div className="demo-card mt-8">
 					<h3 className="demo-section-title mb-2">Powered by Drizzle ORM</h3>
 					<p className="demo-muted mb-4 text-sm">
-						Next-generation ORM for Node.js & TypeScript with PostgreSQL
+						Drizzle ORM on Cloudflare D1
 					</p>
 					<div className="space-y-2 text-sm">
 						<p className="font-medium">Setup Instructions:</p>
 						<ol className="demo-muted list-inside list-decimal space-y-2">
 							<li>
-								Configure your <code>DATABASE_URL</code> in .env.local
+								Local migrations run automatically on <code>bun run dev</code>
 							</li>
 							<li>
-								Run: <code>bunx --bun drizzle-kit generate</code>
-							</li>
-							<li>
-								Run: <code>bunx --bun drizzle-kit migrate</code>
-							</li>
-							<li>
-								Optional: <code>bunx --bun drizzle-kit studio</code>
+								Deploy: <code>wrangler d1 create bengkelku-db</code>, set{" "}
+								<code>database_id</code>, then{" "}
+								<code>bun run db:migrate:remote</code>
 							</li>
 						</ol>
 					</div>
