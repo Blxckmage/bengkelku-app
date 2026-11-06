@@ -8,11 +8,11 @@
     "dev": "turbo run dev",
     "build": "turbo run build",
     "lint": "turbo run lint",
-    "format": "biome format --write .",
-    "check": "biome check ."
+    "format": "turbo run format",
+    "check": "turbo run check"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
+    "@tanstack/server-functions-plugin": "1.120.17",
     "turbo": "^2.2.3",
     "typescript": "^5.6.3"
   },
