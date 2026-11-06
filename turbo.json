@@ -4,7 +4,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".vinxi/**", "dist/**", ".output/**"]
+      "outputs": [".vinxi/**", "dist/**", ".output/**", ".vercel/**"]
     },
     "dev": {
       "cache": false,
@@ -12,6 +12,12 @@
     },
     "lint": {
       "dependsOn": ["^lint"]
+    },
+    "check": {
+      "dependsOn": ["^check"]
+    },
+    "format": {
+      "cache": false
     }
   }
 }
